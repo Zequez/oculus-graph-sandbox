@@ -4,6 +4,7 @@ import './App.css';
 import { GRAPH_ENDPOINT } from '../config';
 import { prettify, payloadDecoder, prettifyQuery, generatePayload } from '../utils';
 import Input from './Input';
+import examples from '../examples'
 
 /*class App extends React.Component<null, null> {
   render() {
@@ -45,8 +46,8 @@ export default class App extends React.Component<null, State> {
     });
   }
 
-  changeAccessToken = (accessToken: string) => {
-    this.setState({accessToken});
+  changeAccessToken = (ev: React.SyntheticEvent<HTMLInputElement>) => {
+    this.setState({accessToken: ev.currentTarget.value});
   }
 
   changeQuery = (ev: React.SyntheticEvent<HTMLTextAreaElement>) => {
@@ -77,55 +78,62 @@ export default class App extends React.Component<null, State> {
     let { result, query, accessToken, runningQuery } = this.state;
 
     return (
-      <div>
+      <div className="OculusSandbox">
         <h1>Oculus Graph API Sandbox</h1>
-        <div className="OculusSandbox">
-          <p>
-            To obtain an <strong>access token</strong> for the Oculus Graph API:
-          </p>
-          <ol>
-            <li>
-              <strong>
-                Don't do it unless you trust this website, as the access token gives
-                you full control of the Oculus account.</strong> The
-              token is sent directly to the Oculus servers from here, and it's not stored anywhere.
-            </li>
-            <li>Login on the <a href="https://www.oculus.com/">Oculus Website</a></li>
-            <li>Right click the page and select "View Page Source" (on Chrome)</li>
-            <li>Search with Ctrl+F for "accessToken"</li>
-            <li>Copy the long string of characters next to "accessToken"</li>
-            <li>Paste it in the box below</li>
-          </ol>
+        <p>
+          Oculus uses <a href="http://graphql.org/">GraphQL</a> on their client to
+          get data from their servers. This app lets you make arbitrary requests
+          to that server, however, you need an <strong>access token</strong>.
+        </p>
+        <p>
+          This project is <a href="http://github.com/zequez/oculus-graph-sandbox">
+          open source</a> and hosted by Github pages, and it doesn't
+          store the access token anywhere.
+        </p>
+        <p>
+          To obtain an <strong>access token</strong> follow the following steps:
+        </p>
+        <ol>
+          <li>Make sure you're logged in on the <a href="https://www.oculus.com/">Oculus Website</a></li>
+          <li>Right click the page and select "View Page Source" (on Chrome)</li>
+          <li>Search with Ctrl+F for "accessToken"</li>
+          <li>Copy the long string of characters next to "accessToken"</li>
+          <li>Paste it in the box below</li>
+        </ol>
 
-          <Input
-            onChange={this.changeAccessToken}
-            value={accessToken}
-            className="OculusSandbox__AccessToken"
-            label="Access Token"
-          />
-          <textarea
-            value={query}
-            onChange={this.changeQuery}
-            className="OculusSandbox__query"
-          />
-          
-          <div className='OculusSandbox__actions'>
-            <button onClick={this.runQuery} disabled={runningQuery}>
-              Run Query
-            </button>
-            <button onClick={this.decodePayload}>
-              Decode Payload
-            </button>
-          </div>
-          <p>
-            The "decode payload" button is to extract the
-            graph query and access token from a payload
-            sent to the server (likely from an official client)
-          </p>
-          <code>
-            {result.map((v) => prettify(v)).join('\n\n')}
-          </code>
+        <input
+          onChange={this.changeAccessToken}
+          value={accessToken}
+          className="OculusSandbox__AccessToken"
+          placeholder="Access Token"
+        />
+        <p>
+          <strong>
+            Don't share your access token, as it gives the holder complete
+            access to the Oculus account!
+          </strong>
+        </p>
+        <textarea
+          value={query}
+          onChange={this.changeQuery}
+          className="OculusSandbox__query"
+        />
+        <div className="OculusSandbox__actions">
+          <button onClick={this.runQuery} disabled={runningQuery}>
+            Run Query
+          </button>
+          <button onClick={this.decodePayload}>
+            Decode Payload
+          </button>
         </div>
+        <p>
+          The "decode payload" button is to extract the
+          graph query and access token from a payload
+          sent to the server (likely from an official client)
+        </p>
+        <code>
+          {result.map((v) => prettify(v)).join('\n\n')}
+        </code>
       </div>
     );
   }

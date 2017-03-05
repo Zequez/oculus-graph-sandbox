@@ -1,0 +1,53 @@
+$g: 8px
+$gg: $g*7
+$line-height: $g*3
+$color-pri: DodgerBlue
+$font-size-input: 18px
+$font-family-mono: Courier, monospace
+
+.OculusSandbox
+  width: 100%
+  max-width: 1200px
+  margin: 0 auto
+  padding: 0 $g*3
+  h1
+    font-size: 2rem
+    line-height: $line-height * 2
+  p, ol, h1, input, textarea
+    margin: $line-height 0
+  strong
+    font-weight: bold
+  ol
+    list-style-type: circle
+    list-style-position: inside
+  input, textarea
+    display: block
+    width: 100%
+    padding: $g
+    border: solid 1px Silver
+  input, textarea, button
+    border-radius: 2px
+    font-size: $font-size-input
+    &:focus
+      outline: none
+      border: solid 1px $color-pri
+  input
+    height: $line-height * 2
+  textarea
+    height: $gg*6
+    font-family: $font-family-mono
+  button
+    float: right
+    margin-left: $g*2
+    height: $line-height * 2
+    padding: 0 $g*3
+    border: none
+    background: $color-pri
+    box-shadow: 0 2px 5px rgba(#000, 0.3)
+    color: white
+    cursor: pointer
+    &:hover
+      background: DeepSkyBlue
+  code
+    font-family: $font-family-mono
+    white-space: pre
