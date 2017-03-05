@@ -3,12 +3,17 @@ export function prettify (data: Object) {
 }
 
 export function payloadDecoder (payload: String) {
+  interface Result {
+    queries: string;
+    access_token: string;
+  }
+
   let result = {};
   payload.split('&').forEach((v) => {
     let vv = v.split('=');
     result[vv[0]] = decodeURIComponent(vv[1]);
   });
-  return result;
+  return <Result> result;
 }
 
 export function toQueryString (object: Object) {
