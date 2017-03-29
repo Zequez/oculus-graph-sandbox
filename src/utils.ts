@@ -27,16 +27,9 @@ export function toQueryString (object: Object) {
 export function generatePayload (accessToken: String, query: String) {
   return toQueryString({
     access_token: accessToken,
-    batch_name: 'Queries',
     method: 'GET',
-    queries: JSON.stringify({
-      q1: {
-        priority: 0,
-        q: query
-      }
-    }),
-    response_format: 'json',
-    scheduler: 'phased'
+    q: query,
+    response_format: 'json'
   });
 }
 

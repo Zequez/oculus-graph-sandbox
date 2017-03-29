@@ -25,7 +25,7 @@ interface State {
 export default class App extends React.Component<null, State> {
   state: State = {
     result: [],
-    query: '',
+    query: Object.values(examples)[0],
     accessToken: '',
     runningQuery: false
   };

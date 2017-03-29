@@ -13,7 +13,7 @@ To inspect the official client requests I used [Fiddler](www.telerik.com/fiddler
 The Oculus Graph API endpoint is:
 
 ```
-https://graph.oculus.com/graphqlbatch
+https://graph.oculus.com/graphql
 ```
 
 ## Query
@@ -23,21 +23,16 @@ To query the database you make a POST request with the following data in the bod
 ```
 {
     access_token: <ACCESS_TOKEN>,
-    batch_name: 'Queries',
     method: 'GET',
-    queries: JSON.stringify({
-      q1: {
-        priority: 0,
-        q: <GRAPH_QL_QUERY>
-      }
-    }),
-    response_format: 'json',
-    scheduler: 'phased'
+    q: <GRAPH_QL_QUERY>,
+    response_format: 'json'
   }
 ```
-
-You can send multiple queries if you add more in addition to `q1`.
 
 Of course, you need to know how the database structure is to be able to submit a query that doesn't return with an error. You can see some examples on [src/examples.ts](https://github.com/zequez/oculus-graph-sandbox/tree/master/src/examples.ts) you can see the query I use to extract all the games data for GGFilter.
 
 I'll try to properly document the database, maybe.
+
+## Similar projects
+
+[if1live/oculus-graph](https://github.com/if1live/oculus-graph) has better documentation, although it doesn't have a sandbox. My requirements were just to get all the games.
