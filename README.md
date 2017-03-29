@@ -33,6 +33,10 @@ Of course, you need to know how the database structure is to be able to submit a
 
 I'll try to properly document the database, maybe.
 
+## Why TypeScript?
+
+Because I wanted to try it.
+
 ## Similar projects
 
 [if1live/oculus-graph](https://github.com/if1live/oculus-graph) has better documentation, although it doesn't have a sandbox. My requirements were just to get all the games.
